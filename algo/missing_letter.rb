@@ -3,7 +3,29 @@
 # bonus: returns a string of all missing letters as a string. ex: find_missing_letter("ace") would return "bd", write your own test.
 
 def find_missing_letter(range)
+  letter_hash = {}
+  ('a'..'z').each do |char|
+    letter_hash[char] = 0
+  end
+  
+  range.downcase!
+  range.each_char do |char|
+    letter_hash[char] += 1
+  end
 
+  starting_letter = range[0]
+  last_letter = range[-1]
+  missing_letter = ""
+  is_missing = false
+
+  (starting_letter..last_letter). each do |char|
+    if (letter_hash[char]).zero?
+      missing_letter += char
+      is_missing = true
+    end
+  end
+
+  is_missing ? missing_letter : nil
 end
 
 # Driver code - don't touch anything below this line.
